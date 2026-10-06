@@ -1,0 +1,31 @@
+Instalação local
+
+Requisitos: Node.js 22.13 ou superior, PostgreSQL 18 e pgAdmin 4.
+Os comandos de terminal devem ser executados na pasta clonada do projeto.
+
+1. Instale os pacotes:
+   npm ci
+
+2. Prepare a configuração e informe o e-mail do Super Administrador:
+   npm run setup:local
+   Guarde a senha temporária exibida no terminal. Ela será trocada no primeiro acesso.
+
+3. No pgAdmin, abra o Query Tool do banco postgres, com Auto commit habilitado,
+   e execute este comando uma única vez:
+
+   CREATE DATABASE reabilitah WITH TEMPLATE template0 ENCODING 'UTF8';
+
+4. Abra o Query Tool do novo banco reabilitah usando a conta postgres.
+   Abra e execute TODO o arquivo local/configurar-acesso.sql gerado no passo 2.
+   Ele cria a estrutura completa, a conta restrita da aplicação e o primeiro acesso.
+
+5. Inicie o sistema:
+   npm run dev
+   Abra http://localhost:3000 e entre com o e-mail e a senha temporária do passo 2.
+
+Não execute a instalação em um banco que já contém dados.
+As configurações padrão usam PostgreSQL em 127.0.0.1:5432. Se necessário,
+ajuste a porta em .env.local. O e-mail de suporte também pode ser alterado ali.
+
+Não envie .env.local nem a pasta local para o GitHub; contêm dados desta instalação.
+O arquivo database/estrutura.sql é a base usada pelo configurador, sem credenciais.
